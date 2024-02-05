@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://dluodak2agj1d"]
+
+[ext_resource type="Texture2D" uid="uid://dxkxw53fbub5s" path="res://sprites/jugador.png" id="1_hwjfo"]
+[ext_resource type="Script" path="res://computer/computer.gd" id="1_iwiut"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jfjpx"]
+height = 90.0
+
+[node name="Computer" type="CharacterBody2D"]
+position = Vector2(1180, 360)
+script = ExtResource("1_iwiut")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_hwjfo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_jfjpx")
