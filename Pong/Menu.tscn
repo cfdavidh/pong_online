@@ -1,0 +1,43 @@
+[gd_scene load_steps=2 format=3 uid="uid://cjexcqal18548"]
+
+[ext_resource type="Script" path="res://Pong/Menu.gd" id="1_kxfw1"]
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_kxfw1")
+
+[node name="SinglePlayer" type="Button" parent="."]
+layout_mode = 0
+offset_left = 159.0
+offset_top = 374.0
+offset_right = 328.0
+offset_bottom = 424.0
+theme_override_font_sizes/font_size = 30
+text = "Un Jugador"
+
+[node name="Host" type="Button" parent="."]
+layout_mode = 0
+offset_left = 157.0
+offset_top = 476.0
+offset_right = 311.0
+offset_bottom = 526.0
+theme_override_font_sizes/font_size = 30
+text = "Crear Sala"
+
+[node name="Join" type="Button" parent="."]
+layout_mode = 0
+offset_left = 157.0
+offset_top = 577.0
+offset_right = 259.0
+offset_bottom = 627.0
+theme_override_font_sizes/font_size = 30
+text = "Unirse"
+
+[connection signal="pressed" from="SinglePlayer" to="." method="_on_singleplayer_pressed"]
+[connection signal="pressed" from="Host" to="." method="_on_host_pressed"]
+[connection signal="pressed" from="Join" to="." method="_on_join_pressed"]

@@ -24,4 +24,7 @@ func reset():
 	$jugador.position.y = CENTER.y
 
 
+func _on_volvel_pressed():
+	get_tree().change_scene_to_file("res://Pong/Menu.tscn")
+
 

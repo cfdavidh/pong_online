@@ -1,10 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://cc1g06ni85qpm"]
+[gd_scene load_steps=9 format=3 uid="uid://d0yuix4mdebqt"]
 
-[ext_resource type="PackedScene" uid="uid://bvwnhqr48a6sl" path="res://jugador/character_body_2d.tscn" id="1_7x80c"]
-[ext_resource type="Script" path="res://Pong/Pong.gd" id="1_d2mbu"]
-[ext_resource type="PackedScene" uid="uid://dluodak2agj1d" path="res://computer/computer.tscn" id="2_keuv4"]
-[ext_resource type="PackedScene" uid="uid://drva1eyjtjfvi" path="res://pelota/pelota.tscn" id="3_5cekt"]
-[ext_resource type="Texture2D" uid="uid://bqqmi674gjc1k" path="res://sprites/pared.png" id="4_gbqwg"]
+[ext_resource type="Script" path="res://Pong/Pong.gd" id="1_bbtj2"]
+[ext_resource type="PackedScene" uid="uid://dluodak2agj1d" path="res://computer/computer.tscn" id="2_wv65a"]
+[ext_resource type="PackedScene" uid="uid://drva1eyjtjfvi" path="res://pelota/pelota.tscn" id="3_b2eka"]
+[ext_resource type="PackedScene" uid="uid://bvwnhqr48a6sl" path="res://jugador/character_body_2d.tscn" id="4_aswy1"]
+[ext_resource type="Texture2D" uid="uid://bqqmi674gjc1k" path="res://sprites/pared.png" id="5_l0sgb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gch4q"]
 size = Vector2(1278, 30)
@@ -15,21 +15,21 @@ size = Vector2(32, 719)
 [sub_resource type="LabelSettings" id="LabelSettings_0n3sv"]
 font_size = 45
 
-[node name="Pong" type="Node2D"]
-script = ExtResource("1_d2mbu")
+[node name="PongMultiplayer" type="Node2D"]
+script = ExtResource("1_bbtj2")
 
-[node name="Computer" parent="." instance=ExtResource("2_keuv4")]
+[node name="Computer" parent="." instance=ExtResource("2_wv65a")]
 
-[node name="Pelota" parent="." instance=ExtResource("3_5cekt")]
+[node name="Pelota" parent="." instance=ExtResource("3_b2eka")]
 
-[node name="jugador" parent="." instance=ExtResource("1_7x80c")]
+[node name="jugador" parent="." instance=ExtResource("4_aswy1")]
 
 [node name="ParedAbajo" type="StaticBody2D" parent="."]
 position = Vector2(640, 736)
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="ParedAbajo"]
-texture = ExtResource("4_gbqwg")
+texture = ExtResource("5_l0sgb")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ParedAbajo"]
 position = Vector2(1, 1)
@@ -40,7 +40,7 @@ position = Vector2(640, -18)
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="ParedArriba"]
-texture = ExtResource("4_gbqwg")
+texture = ExtResource("5_l0sgb")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ParedArriba"]
 position = Vector2(1, 1)
@@ -82,14 +82,5 @@ label_settings = SubResource("LabelSettings_0n3sv")
 horizontal_alignment = 1
 metadata/_edit_group_ = true
 
-[node name="Volvel" type="Button" parent="."]
-offset_left = 613.0
-offset_top = 24.0
-offset_right = 666.0
-offset_bottom = 55.0
-text = "Menú"
-metadata/_edit_group_ = true
-
 [connection signal="body_entered" from="GolIzquierdo" to="." method="_on_gol_izquierdo_body_entered"]
 [connection signal="body_entered" from="GolDerecho" to="." method="_on_gol_derecho_body_entered"]
-[connection signal="pressed" from="Volvel" to="." method="_on_volvel_pressed"]
