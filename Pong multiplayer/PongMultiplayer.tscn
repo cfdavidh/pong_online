@@ -1,10 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://d0yuix4mdebqt"]
+[gd_scene load_steps=7 format=3 uid="uid://d0yuix4mdebqt"]
 
-[ext_resource type="Script" path="res://Pong/Pong.gd" id="1_bbtj2"]
-[ext_resource type="PackedScene" uid="uid://dluodak2agj1d" path="res://computer/computer.tscn" id="2_wv65a"]
+[ext_resource type="Script" path="res://Pong multiplayer/PongMultiplayer.gd" id="1_uowou"]
+[ext_resource type="PackedScene" uid="uid://bvwnhqr48a6sl" path="res://jugador/character_body_2d.tscn" id="2_eykb5"]
 [ext_resource type="PackedScene" uid="uid://drva1eyjtjfvi" path="res://pelota/pelota.tscn" id="3_b2eka"]
-[ext_resource type="PackedScene" uid="uid://bvwnhqr48a6sl" path="res://jugador/character_body_2d.tscn" id="4_aswy1"]
-[ext_resource type="Texture2D" uid="uid://bqqmi674gjc1k" path="res://sprites/pared.png" id="5_l0sgb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gch4q"]
 size = Vector2(1278, 30)
@@ -16,20 +14,15 @@ size = Vector2(32, 719)
 font_size = 45
 
 [node name="PongMultiplayer" type="Node2D"]
-script = ExtResource("1_bbtj2")
-
-[node name="Computer" parent="." instance=ExtResource("2_wv65a")]
+script = ExtResource("1_uowou")
+player_scene = ExtResource("2_eykb5")
 
 [node name="Pelota" parent="." instance=ExtResource("3_b2eka")]
-
-[node name="jugador" parent="." instance=ExtResource("4_aswy1")]
+texture_filter = 1
 
 [node name="ParedAbajo" type="StaticBody2D" parent="."]
 position = Vector2(640, 736)
 metadata/_edit_group_ = true
-
-[node name="Sprite2D" type="Sprite2D" parent="ParedAbajo"]
-texture = ExtResource("5_l0sgb")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ParedAbajo"]
 position = Vector2(1, 1)
@@ -38,9 +31,6 @@ shape = SubResource("RectangleShape2D_gch4q")
 [node name="ParedArriba" type="StaticBody2D" parent="."]
 position = Vector2(640, -18)
 metadata/_edit_group_ = true
-
-[node name="Sprite2D" type="Sprite2D" parent="ParedArriba"]
-texture = ExtResource("5_l0sgb")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ParedArriba"]
 position = Vector2(1, 1)
@@ -82,5 +72,21 @@ label_settings = SubResource("LabelSettings_0n3sv")
 horizontal_alignment = 1
 metadata/_edit_group_ = true
 
+[node name="volver" type="Button" parent="."]
+offset_left = 614.0
+offset_top = 21.0
+offset_right = 667.0
+offset_bottom = 52.0
+text = "Menú"
+
+[node name="SpawnLocation" type="Node2D" parent="."]
+
+[node name="0" type="Node2D" parent="SpawnLocation" groups=["PlayerSpawnPoint"]]
+position = Vector2(100, 360)
+
+[node name="1" type="Node2D" parent="SpawnLocation" groups=["PlayerSpawnPoint"]]
+position = Vector2(1180, 360)
+
 [connection signal="body_entered" from="GolIzquierdo" to="." method="_on_gol_izquierdo_body_entered"]
 [connection signal="body_entered" from="GolDerecho" to="." method="_on_gol_derecho_body_entered"]
+[connection signal="pressed" from="volver" to="." method="_on_volver_pressed"]

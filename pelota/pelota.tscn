@@ -1,10 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://drva1eyjtjfvi"]
+[gd_scene load_steps=5 format=3 uid="uid://drva1eyjtjfvi"]
 
 [ext_resource type="Script" path="res://pelota/pelota.gd" id="1_dqxce"]
 [ext_resource type="Texture2D" uid="uid://c5k48nminf3c4" path="res://sprites/pelota.png" id="1_uia2h"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xhgwe"]
 radius = 17.0
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_qsy74"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
 
 [node name="Pelota" type="CharacterBody2D"]
 position = Vector2(640, 360)
@@ -17,3 +22,6 @@ texture = ExtResource("1_uia2h")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_xhgwe")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_qsy74")
