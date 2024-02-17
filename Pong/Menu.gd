@@ -1,6 +1,6 @@
 extends Control
 var peer
-@export var adrees = "127.0.0.1"
+var adrees 
 @export var port = 8911
 
 func _ready():
@@ -17,6 +17,13 @@ func player_connected(id):
 
 func player_disconnected(id):
 	print("player diconnected " + str(id))
+	#borra los jugadores en el autoload desde su key y su value(que es un diccionario tambien)
+	GAMEMANAGER.players.erase(id)
+	var player_disc = get_tree().get_nodes_in_group("player")
+	for i in player_disc:
+		if i.name == str(id):
+			i.queue_free()
+	
 
 func connected_to_server():
 	print("connect to the server")
@@ -54,13 +61,17 @@ func _on_host_pressed():
 	send_player_information("", multiplayer.get_unique_id())
 
 
+
 func _on_join_pressed():
+	adrees = $LineEdit.text
 	peer = ENetMultiplayerPeer.new()
 	#acá el peer se inicializa como cliente (le mando la direccion a la que debe conectarse)
 	peer.create_client(adrees, port)
 	peer.get_host().compress(ENetConnection.COMPRESS_RANGE_CODER) 
 	#aca envio mi peer que creó un cliente al MultiplayerAPI 
 	multiplayer.set_multiplayer_peer(peer)
+	multiplayer.is_server()
+
 
 
 #@rpc es lo que hace que una funcion se ejecute en todos los peer (@rpc debe estar encima de la funcion)
@@ -89,6 +100,7 @@ func send_player_information(name, id):
 	#vuelve a ejecutar la función en cada peer conectado a la red, guardando los datos en el diccionario de cada uno
 		for i in GAMEMANAGER.players:
 			send_player_information.rpc(GAMEMANAGER.players[i].name, i)
+
 
 
 

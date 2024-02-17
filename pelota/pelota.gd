@@ -28,5 +28,5 @@ func _physics_process(delta):
 		var collition_info = move_and_collide(velocity * delta)
 		if collition_info:
 			velocity = velocity.bounce(collition_info.get_normal())
-		print()
+	
 

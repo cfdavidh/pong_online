@@ -11,7 +11,7 @@ properties/0/path = NodePath(".:position")
 properties/0/spawn = true
 properties/0/replication_mode = 1
 
-[node name="JugadorOnline" type="CharacterBody2D"]
+[node name="JugadorOnline" type="CharacterBody2D" groups=["player"]]
 position = Vector2(-45, -63)
 script = ExtResource("1_l5bj6")
 metadata/_edit_group_ = true
