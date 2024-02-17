@@ -3,9 +3,7 @@ extends CharacterBody2D
 var speed = 550
 
 func _ready():
-	$MultiplayerSynchronizer.set_multiplayer_authority(1)
-	if $MultiplayerSynchronizer.get_multiplayer_authority() == multiplayer.get_unique_id():
-		set_ball_velocity()
+	set_ball_velocity()
 	
 
 func set_ball_velocity():
@@ -22,9 +20,8 @@ func set_ball_velocity():
 
 
 func _physics_process(delta):
-	if $MultiplayerSynchronizer.get_multiplayer_authority() == multiplayer.get_unique_id():
-		#el move_and_collide(argumento) retorna un KinematicCollision2D un nodo de info hacerca de la colción
-		var collition_info = move_and_collide(velocity * delta)
-		if collition_info:
-			velocity = velocity.bounce(collition_info.get_normal())
+	#el move_and_collide(argumento) retorna un KinematicCollision2D un nodo de info hacerca de la colción
+	var collition_info = move_and_collide(velocity * delta)
+	if collition_info:
+		velocity = velocity.bounce(collition_info.get_normal())
 

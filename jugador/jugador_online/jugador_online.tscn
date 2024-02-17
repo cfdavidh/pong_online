@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://dd4k37pparyqf"]
+
+[ext_resource type="Script" path="res://jugador/jugador_online/jugador_online.gd" id="1_l5bj6"]
+[ext_resource type="Texture2D" uid="uid://dxkxw53fbub5s" path="res://sprites/jugador.png" id="1_o4pyj"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jfjpx"]
+height = 90.0
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ta6mq"]
+
+[node name="JugadorOnline" type="CharacterBody2D"]
+position = Vector2(-45, -63)
+script = ExtResource("1_l5bj6")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_o4pyj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_jfjpx")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_ta6mq")

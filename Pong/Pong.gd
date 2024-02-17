@@ -21,7 +21,8 @@ func reset():
 	$Pelota.position = CENTER 
 	$Pelota.call("set_ball_velocity")
 	$Computer.position.y = CENTER.y
-	$jugador.position.y = CENTER.y
+	$Pelota.position.y = CENTER.y
+	$JugadorUnJugador.position.y = CENTER.y
 
 
 func _on_volvel_pressed():

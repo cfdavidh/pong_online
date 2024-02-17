@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://d0yuix4mdebqt"]
 
 [ext_resource type="Script" path="res://Pong multiplayer/PongMultiplayer.gd" id="1_uowou"]
-[ext_resource type="PackedScene" uid="uid://bvwnhqr48a6sl" path="res://jugador/character_body_2d.tscn" id="2_eykb5"]
+[ext_resource type="PackedScene" uid="uid://dd4k37pparyqf" path="res://jugador/jugador_online/jugador_online.tscn" id="2_kq2dg"]
 [ext_resource type="PackedScene" uid="uid://drva1eyjtjfvi" path="res://pelota/pelota.tscn" id="3_b2eka"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gch4q"]
@@ -15,7 +15,7 @@ font_size = 45
 
 [node name="PongMultiplayer" type="Node2D"]
 script = ExtResource("1_uowou")
-player_scene = ExtResource("2_eykb5")
+player_scene = ExtResource("2_kq2dg")
 
 [node name="Pelota" parent="." instance=ExtResource("3_b2eka")]
 texture_filter = 1
@@ -37,7 +37,7 @@ position = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_gch4q")
 
 [node name="GolIzquierdo" type="Area2D" parent="."]
-position = Vector2(-4, 360)
+position = Vector2(-13, 360)
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GolIzquierdo"]

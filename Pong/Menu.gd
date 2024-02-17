@@ -1,17 +1,19 @@
 extends Control
 var peer
 @export var adrees = "127.0.0.1"
-@export var port = 8910
+@export var port = 8911
 
 func _ready():
 	multiplayer.peer_connected.connect(player_connected)
 	multiplayer.peer_disconnected.connect(player_disconnected)
 	multiplayer.connected_to_server.connect(connected_to_server)
 	multiplayer.connection_failed.connect(connection_failed)
+	$MultiplayerJoin.hide()
 
 
 func player_connected(id):
 	print("player connected " + str(id))
+	$MultiplayerJoin.show()
 
 func player_disconnected(id):
 	print("player diconnected " + str(id))
@@ -19,6 +21,7 @@ func player_disconnected(id):
 func connected_to_server():
 	print("connect to the server")
 	send_player_information.rpc_id(1, "", multiplayer.get_unique_id())
+	
 
 func connection_failed():
 	print("failed to connect to the server")
@@ -53,7 +56,7 @@ func _on_host_pressed():
 
 func _on_join_pressed():
 	peer = ENetMultiplayerPeer.new()
-	#acá el peer se inicializa como cliente
+	#acá el peer se inicializa como cliente (le mando la direccion a la que debe conectarse)
 	peer.create_client(adrees, port)
 	peer.get_host().compress(ENetConnection.COMPRESS_RANGE_CODER) 
 	#aca envio mi peer que creó un cliente al MultiplayerAPI 
@@ -66,8 +69,8 @@ func start_game_online():
 		get_tree().change_scene_to_file("res://Pong multiplayer/PongMultiplayer.tscn")
 
 func _on_multiplayer_join_pressed():
-	#poner un if is_server_active 
-	start_game_online.rpc()
+	if multiplayer.is_server():
+		start_game_online.rpc()
 
 
 #para el GameManager
@@ -81,14 +84,11 @@ func send_player_information(name, id):
 		"id": id, 
 		"score": 0
 		}
-	#si tu peer del MultiplayerAPI es un server se ejecuta esto (creo que debe ir dentro del if de arriba, sino sera un bucle y la funcion se ejecutara siempre)
+	#si tu peer del MultiplayerAPI es un server se ejecuta esto 
 	if multiplayer.is_server():
 	#vuelve a ejecutar la función en cada peer conectado a la red, guardando los datos en el diccionario de cada uno
 		for i in GAMEMANAGER.players:
 			send_player_information.rpc(GAMEMANAGER.players[i].name, i)
-		
-		print(GAMEMANAGER.players)
-	
 
 
 

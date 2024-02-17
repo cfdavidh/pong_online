@@ -5,7 +5,9 @@ var computer_score = 0
 
 const CENTER = Vector2(640,360)
 
+
 @export var player_scene: PackedScene
+
 
 func _ready():
 	var index = 0
@@ -20,9 +22,10 @@ func _ready():
 			if spawn.name == str(index):
 				#esto asigna a cada jugador creado anteriormente su posicion, que será distinta para cada uno
 				current_player.global_position = spawn.global_position
+		
 		index += 1
 		
-	
+
 
 
 
@@ -48,5 +51,5 @@ func reset():
 
 func _on_volver_pressed():
 	get_tree().change_scene_to_file("res://Pong/Menu.tscn")
-	
+
 
