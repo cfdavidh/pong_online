@@ -7,6 +7,9 @@
 height = 90.0
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ta6mq"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
 
 [node name="JugadorOnline" type="CharacterBody2D"]
 position = Vector2(-45, -63)

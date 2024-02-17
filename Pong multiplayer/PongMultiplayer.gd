@@ -8,7 +8,6 @@ const CENTER = Vector2(640,360)
 
 @export var player_scene: PackedScene
 
-
 func _ready():
 	var index = 0
 	#itera tantas veces como jugadores conectados haya
@@ -43,10 +42,11 @@ func _on_gol_derecho_body_entered(body):
 	reset()
 
 func reset():
-	$Pelota.position = CENTER 
-	#call ejecuta una funcion de otro nodo
-	$Pelota.call("set_ball_velocity")
-	#$jugador.position.y = CENTER.y
+	if get_node("Pelota/MultiplayerSynchronizer").get_multiplayer_authority() == multiplayer.get_unique_id():
+		$Pelota.position = CENTER 
+		#call ejecuta una funcion de otro nodo
+		$Pelota.call("set_ball_velocity")
+		#$jugador.position.y = CENTER.y
 
 
 func _on_volver_pressed():
