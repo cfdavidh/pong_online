@@ -10,6 +10,7 @@ var my_delta
 
 func _physics_process(delta):
 	my_delta = delta
+	
 	if $MultiplayerSynchronizer.get_multiplayer_authority() == multiplayer.get_unique_id():
 		motion_control()
 

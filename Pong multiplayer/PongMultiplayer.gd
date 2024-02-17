@@ -49,16 +49,23 @@ func reset():
 		#$jugador.position.y = CENTER.y
 
 
+
 func _on_volver_pressed():
+	
+	remove_player.rpc()
+	
+
+
+@rpc("any_peer","call_local")
+func remove_player():
 	var id = multiplayer.get_unique_id()
-	multiplayer.multiplayer_peer = null
 	print("player diconnected " + str(id))
 	#borra los jugadores en el autoload desde su key y su value(que es un diccionario tambien)
-	GAMEMANAGER.players.erase(id)
+	GAMEMANAGER.players.clear()
 	var player_disc = get_tree().get_nodes_in_group("player")
 	for i in player_disc:
 		if i.name == str(id):
 			i.queue_free()
+	multiplayer.multiplayer_peer = null
+	
 	get_tree().change_scene_to_file("res://Pong/Menu.tscn")
-
-
