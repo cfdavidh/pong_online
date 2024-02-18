@@ -47,6 +47,11 @@ func reset():
 		#call ejecuta una funcion de otro nodo
 		$Pelota.call("set_ball_velocity")
 		#$jugador.position.y = CENTER.y
+	
+	var reset_jugadores = get_tree().get_nodes_in_group("player")
+	for i in reset_jugadores:
+		i.position.y = CENTER.y
+	
 
 
 
